@@ -15,7 +15,8 @@ app.get('/test', (req, res) => {
         time_end: '22:00',
         service: 'Собачьи ножки',
         isScreenshot: true,
-        url: 'https://dogslegs.ru'
+        url: 'https://dogslegs.ru',
+        SDNumber: '',
     }
     const response = clicheHandler(requestSimBody);
     // console.log(response)
