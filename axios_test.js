@@ -1,0 +1,10 @@
+const axios = require('axios');
+
+axios.get({
+    url: 'https://login.mos.ru/sps/login/methods/password',
+    headers: {
+        "cookie": "Cookie: fm=eyJtZXRob2RzIjpbInBhc3N3b3JkIiwieDUwOSIsImV4dGVybmFsSWRwcyJdLCJwYXJhbXMiOnsiY2hhbGxlbmdlIjoiMmVxdFRmOXZMZWxWbVlVTmxuWHEiLCJmZWRQb2ludHMiOiJ5YW5kZXg6eWFuZGV4XzF8c2JyZjpzYnJmXzF8Z29vZ2xlOmdvb2dsZV8xfHZrOnZrXzF8ZmFjZWJvb2s6ZmFjZWJvb2tfMXxlc2lhOmVzaWFfMXxvazpva18xfG1haWw6bWFpbF8xIn19; origin=53w5fwZVaZiNYy4QYHZp|%2Fsps%2Foauth%2Fae%3Fscope%3Dprofile%2Bopenid%2Bcontacts%26response_type%3Dcode%26redirect_uri%3Dhttps%3A%2F%2Fwww.mos.ru%2Fapi%2Facs%2Fv1%2Flogin%2Fsatisfy%26client_id%3D53w5fwZVaZiNYy4QYHZp; blg=ru; oauth_az=WjZkf-zXGElUQZ1igYXzzFD5--Vo_l8i1U9HR0dotsVY25G-VM_HIOJoj228phMjyMwsvjvHS4nXS8f018BzghNRJQTW-XDI_6btLpMKt2s; lstate=XjbtnffaSUi16ZNdvKX4oX9Fb_lgLE-f9VEZ5UPreX_3hlAJqfy8pTyy0qfX5r3ANBsp8StdVB8P957mYwe-KQZ5MtSYp3JQaJIyAPBNQuBk65yITRCTi4xQfOg3hFwMIDZM9ktCIG-K3BWuyh7UkpEPrQQWjeU7YVxIHrEZPQyCq1sAt7IAXgllxSEJo20bPvvjM5288jODaLJ4fTTSB4Fe6YHe9K0FA4AIr6wj886BVxbsxm4lKLPYHsA8_S-qeqmJFz4CnaTGkTbIjGuujWWKMPWizKmyLUtBdhWon49cmZIjrKePscKTfOWkWIMsup_-oIQyFBykucttJhRkblBKxBNYczIWGQuqt7z8ER6tTCtHiguFARtHpdpoDDPVchYV4P2hO1XTWgTMbRauGF6FCzaBBu7SIma8kJci401xOMTmzzY8bDE2fXMSu5ax57EoyqwSo3P2CXttZeqCxAvoLGEdLPuM0UssUPqA9R4pSaaK9P8Nw4mDieFM4vdnq-D6fj7boAl9S6A3CDi8xWVNkEo67yYXreOk0FFKOyrdgTSRJnAOmc2wPMLm3m7J9N9xAJgKs-qYPBtYUMfl-Q|MTU5NzMyMzA0Mw|U0gxQVMxMjhDQkM|yVIG-9n6dMl5hH5kYPi8kA|5GAhXX9wIMjg7rk4OuYjT4S1qdg; mos_id=Cg8qAV81NvGwmjxiB/ECAgA=; oxxfgh=a2b6fca0-d36a-4b78-9588-fbc8c47a377d#0#1800000#5000#1800000; KFP_DID=86cf8c64-5b42-d478-8203-7f7a37d725e8"
+    }
+}).then((response) => {
+    console.log(response)
+})
