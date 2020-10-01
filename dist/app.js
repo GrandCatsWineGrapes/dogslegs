@@ -62,6 +62,14 @@ var express_1 = __importDefault(require("express"));
 var serverInfo_1 = require("./serverInfo");
 var app = express_1.default();
 var automaton = __importStar(require("./services/Automaton"));
+var Storage_1 = __importDefault(require("./services/Storage"));
+app.use(express_1.default.json());
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS');
+    res.header('Access-Contol-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept');
+    next();
+});
 app.get('/automaton', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var requestSimBody, AutomatonWorker;
     return __generator(this, function (_a) {
@@ -90,5 +98,41 @@ app.get('/automaton', function (req, res) { return __awaiter(void 0, void 0, voi
 }); });
 app.listen(serverInfo_1.serverInfo.port, serverInfo_1.serverInfo.host, function () {
     console.log("Listening on " + serverInfo_1.serverInfo.host + ":" + serverInfo_1.serverInfo.port);
+});
+app.post('/layout', function (req, res) {
+    var storageWorker = new Storage_1.default();
+    storageWorker.pushLayout(req.body)
+        .then(function (data) {
+        res.status(202).send(data);
+    }).catch(function (err) {
+        res.status(500).send(err + " on POST on /layout");
+    });
+});
+app.delete('/layout/:id', function (req, res) {
+    var storageWorker = new Storage_1.default();
+    storageWorker.deleteLayout(req.params.id)
+        .then(function () {
+        res.status(202).send('success');
+    }).catch(function (err) {
+        res.status(500).send(err + " on DELETE on /layout");
+    });
+});
+app.get('/layout/all', function (req, res) {
+    var storageWorker = new Storage_1.default();
+    storageWorker.findAllLayouts()
+        .then(function (data) { return res.status(200).send(data); })
+        .catch(function (err) { return res.status(500).send(err + " on GET on /layout/all"); });
+});
+app.put('/layout/:id', function (req, res) {
+    var storageWorker = new Storage_1.default();
+    storageWorker.updateLayout(req.params.id, req.body)
+        .then(function () { return res.status(202).send('success'); })
+        .catch(function (err) { return res.status(500).send(err + " on PUT on /layout"); });
+});
+app.get('/layout/:id', function (req, res) {
+    var storageWorker = new Storage_1.default();
+    storageWorker.findLayout(req.params.id)
+        .then(function (val) { return res.status(200).send(val); })
+        .catch(function (err) { return res.status(500).send(err + " on GET on /layout"); });
 });
 //# sourceMappingURL=app.js.map
