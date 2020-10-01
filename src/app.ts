@@ -3,8 +3,10 @@ import fs from 'fs'
 import {serverInfo} from './serverInfo'
 
 const app = express();
-import * as automaton from './services/Automaton'
 import StorageWorker, {ILayout} from './services/Storage'
+
+//to dev
+import {Automaton} from './services/Automaton'
 
 app.use(express.json());
 
@@ -15,25 +17,14 @@ app.use(function(req: Request, res: Response, next: NextFunction) {
     next();
 })
 
-app.get('/automaton', async (req: Request, res: Response) => {
-    const requestSimBody = { //Only for initial testing
-        clicheId: 'problem_unconfirmed',
-        date_start: '12.02.2020',
-        date_end:'30.05.2021',
-        time_start: '10:00',
-        time_end: '22:00',
-        service: 'Собачьи ножки',
-        isScreenshot: true,
-        url: 'https://dogslegs.ru',
-        SDNumber: '',
-    }
-    const AutomatonWorker = new automaton.AutomatonWorker(requestSimBody);
-    await AutomatonWorker.clicheHandler().then(
-        (result: string) => {
-            res.send(result)
-        }
-    )
+
+app.post('/automaton/:id', async (req: Request, res: Response)=> {
+    Automaton(req.params.id).then((handler) => {
+        const handledLayout = handler(...req.body.args);
+        res.status(200).send(handledLayout)
+    })
 })
+
 
 app.listen(serverInfo.port, serverInfo.host, () => {
     console.log(`Listening on ${serverInfo.host}:${serverInfo.port}`)

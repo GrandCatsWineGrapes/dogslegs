@@ -8,6 +8,7 @@ import compareArrays from '../utils'
 export interface ILayout {
     name: string,
     layout: string,
+    variables: string
 }
 
 export default class StorageWorker {
