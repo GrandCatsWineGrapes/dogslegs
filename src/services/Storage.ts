@@ -5,17 +5,34 @@ import { pathToFileURL } from 'url';
 
 import compareArrays from '../utils'
 
+// OLD
+// export interface ILayout {
+//     _id?: string,
+//     name: string,
+//     layout: string,
+//     variables: string,
+//     russian_name: string,
+//     priority: number
+// }
+
 export interface ILayout {
+    _id?: string,
     name: string,
+    russian_name: string,
     layout: string,
-    variables: string
+    priority: number,
+    variables: {
+        varName: string,
+        type: string,
+        russian_varName: string
+    }[],
 }
 
 export default class StorageWorker {
     private _db: Store;
     constructor() {
         this._db = new Store({
-            filename: path.join(__dirname, '../../db/storage.db'),
+            filename: path.join(__dirname, '../../db/storage_new.db'),
             autoload: true
         })
     }

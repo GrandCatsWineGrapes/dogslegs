@@ -13,14 +13,15 @@ app.use(express.json());
 app.use(function(req: Request, res: Response, next: NextFunction) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS');
-    res.header('Access-Contol-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept');
+    res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
     next();
 })
 
 
 app.post('/automaton/:id', async (req: Request, res: Response)=> {
     Automaton(req.params.id).then((handler) => {
-        const handledLayout = handler(...req.body.args);
+        console.log(req.body)
+        const handledLayout = handler(...req.body);
         res.status(200).send(handledLayout)
     })
 })
