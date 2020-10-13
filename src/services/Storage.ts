@@ -3,7 +3,9 @@ import path from 'path';
 
 import { pathToFileURL } from 'url';
 
-import compareArrays from '../utils'
+import {compareArray} from '../utils'
+
+import {ILayout} from '../interfaces/layout'
 
 // OLD
 // export interface ILayout {
@@ -14,19 +16,6 @@ import compareArrays from '../utils'
 //     russian_name: string,
 //     priority: number
 // }
-
-export interface ILayout {
-    _id?: string,
-    name: string,
-    russian_name: string,
-    layout: string,
-    priority: number,
-    variables: {
-        varName: string,
-        type: string,
-        russian_varName: string
-    }[],
-}
 
 export default class StorageWorker {
     private _db: Store;
@@ -64,7 +53,7 @@ export default class StorageWorker {
     async pushLayout(data: ILayout): Promise<ILayout> {
         return new Promise((resolve, reject) => {
             this._db.find({name: data.name}, (err: Error, doc:  ILayout| []) => {
-                if (Array.isArray(doc) && compareArrays(doc, [])) {
+                if (Array.isArray(doc) && compareArray(doc, [])) {
                     this._db.insert(data, (err: Error | null, doc: ILayout) => {
                         if (err) reject(`Error on pushLayout - StorageWorker: ${err}`)
                         else resolve(doc)
