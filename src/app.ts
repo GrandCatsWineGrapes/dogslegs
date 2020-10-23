@@ -26,8 +26,10 @@ class Application {
         this.app.post('/automaton/:id', async (req: Request, res: Response)=> {
             Automaton(req.params.id).then((handler) => {
                 // console.log(req.body)
-                const handledLayout = handler(...req.body);
-                res.status(200).send(handledLayout)
+                if (handler) {
+                    const handledLayout = handler(...req.body);
+                    res.status(200).send(handledLayout)
+                } else res.status(500).send(`Handler is undefined`)
             })
         })
         
@@ -72,10 +74,10 @@ class Application {
                 .catch(err => res.status(500).send(`${err} on GET on /layout`))
         })
 
-        this.app.get('/layoutmaker', (req: Request, res: Response) => {
-            res.send('AAA')
-            // res.redirect(`${serverInfo.host}:${serverInfo.port}/`)
-        })
+        // this.app.get('/layoutmaker', (req: Request, res: Response) => {
+        //     // res.send('AAA')
+        //     res.redirect(`${serverInfo.host}:${serverInfo.port}/`)
+        // })
 
         return this
     }
